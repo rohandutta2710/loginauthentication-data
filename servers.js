@@ -45,7 +45,7 @@ app.get("/login", (req, res) => {
     }
 })
 
-app.post("/login/newuser", (req, res) => {
+app.post("/newuser", (req, res) => {
     clientData = req.body;
     if (clientData.id !== undefined && clientData.password !== undefined && clientData.id.length > 10 && clientData.password.length >= 5 && clientData.id.toLowerCase().endsWith("@gmail.com") && clientData.id.indexOf("@") === clientData.id.lastIndexOf("@")) {
         let data = jsonData.find((val) => {
