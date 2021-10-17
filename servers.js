@@ -5,7 +5,7 @@ const path = require("path")
 const app = express();
 const ports=process.env.PORT || 6000;
 const fileName = "./LoginApis.json";
-const viewPath = path.join(__dirname, "/views");
+const viewPath = path.join(__dirname, "./views");
 let jsonData = fs.readFileSync(fileName, "utf-8");
 jsonData = JSON.parse(jsonData);
 
@@ -65,14 +65,14 @@ app.post("/newuser", (req, res) => {
             }
             jsonData.push(data)
             fs.writeFileSync(fileName, JSON.stringify(jsonData))
-            res.render(path.join(viewPath, "/index.hbs"), { serverStatus: "User is added Succesfully." })
+            res.render(path.join(viewPath, "./index.hbs"), { serverStatus: "User is added Succesfully." })
         }
         else {
-            res.status(400).render(path.join(viewPath, "/index.hbs"), { serverStatus: "User Already exists." })
+            res.status(400).render(path.join(viewPath, "./index.hbs"), { serverStatus: "User Already exists." })
         }
     }
     else {
-        res.status(500).render(path.join(viewPath, "/index.hbs"), { serverStatus: "Invalid credential." });
+        res.status(500).render(path.join(viewPath, "./index.hbs"), { serverStatus: "Invalid credential." });
     }
 });
 
@@ -85,7 +85,7 @@ app.post("/updatedetails", (req, res) => {
         if (i.id.toLowerCase() === clientData.id.toLowerCase() && i.phoneno === clientData.phoneno) {
             i.password.push(clientData.newpassword);
             fs.writeFileSync(fileName, JSON.stringify(jsonData));
-            res.render(path.join(viewPath, "/index.hbs"), { serverStatus: "Password is updated." });
+            res.render(path.join(viewPath, "./index.hbs"), { serverStatus: "Password is updated." });
             break;
         }
     }
@@ -99,11 +99,11 @@ app.post("/deleteuser", (req, res) => {
             // delete jsonData[i]; //this will add null to your data
             jsonData.splice(i, 1)
             fs.writeFileSync(fileName, JSON.stringify(jsonData));
-            res.render(path.join(viewPath, "/index.hbs"), { serverStatus: "Account is deleted succesfully." });
+            res.render(path.join(viewPath, "./index.hbs"), { serverStatus: "Account is deleted succesfully." });
             break;
         }
     }
-    res.status(404).render(path.join(viewPath, "/index.hbs"), { serverStatus: "User doesn't exists." });
+    res.status(404).render(path.join(viewPath, "./index.hbs"), { serverStatus: "User doesn't exists." });
 })
 
 
