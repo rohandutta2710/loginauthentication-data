@@ -65,7 +65,7 @@ app.post("/newuser", (req, res) => {
             }
             jsonData.push(data)
             fs.writeFileSync(fileName, JSON.stringify(jsonData))
-            res.render(path.join(viewPath, "./index.hbs"), { serverStatus: "User is added Succesfully." })
+            res.render(path.join(__dirname, "./views", "./index.hbs"), { serverStatus: "User is added Succesfully." })
         }
         else {
             res.status(400).render(path.join(viewPath, "./index.hbs"), { serverStatus: "User Already exists." })
